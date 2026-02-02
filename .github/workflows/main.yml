@@ -52,7 +52,7 @@ jobs:
 
 
     - name: export-solution action
-      uses: uses: ./.github/actions/powerplatform-actions
+      uses: ./.github/actions/powerplatform-actions
       with:
         environment-url: ${{env.ENVIRONMENT_URL}}
         app-id: ${{env.CLIENT_ID}}
