@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       # Change this value
-      solution_name:
+      solution_name: Github App
         description: 'name of the solution to worked on from Power Platform'
         required: true
         default: ALMLab
@@ -52,7 +52,7 @@ jobs:
 
 
     - name: export-solution action
-      uses: ./.github/actions/powerplatform-actions
+      uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: ${{env.ENVIRONMENT_URL}}
         app-id: ${{env.CLIENT_ID}}
