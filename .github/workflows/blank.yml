@@ -24,17 +24,19 @@ on:
         required: true
         default: solutions/
 
-#edit your values here
+# ✅ Correct location for workflow‑level environment variables
+env:
   ENVIRONMENT_URL: https://orgc9b19932.crm11.dynamics.com/
   CLIENT_ID: 717226da-1708-458e-b56a-559e3a991cc3
   TENANT_ID: 21f86a55-b21d-41aa-b173-656614ff35d9
+
 permissions:
   contents: write
 
 jobs:
   export-from-dev:
-    runs-on: windows-latest        # or ubuntu-latest
-    timeout-minutes: 60            # optional: more headroom for transient retries
+    runs-on: windows-latest
+    timeout-minutes: 60
     env:
       RUNNER_DEBUG: 1
 
