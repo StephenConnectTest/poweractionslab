@@ -6,7 +6,7 @@ on:
     inputs:
       # Values are set by the caller
       solution_name:
-        description: 'The solution unique name'
+        description: 'The solution unique name (not display name)'
         type: string
         default: GithubApp
       solution_shipping_folder:
@@ -18,7 +18,7 @@ on:
         type: string
         default: out/solutions/
       solution_source_folder:
-        description: 'folder name to be created and checked in *do not change*'
+        description: 'folder name to read the unpacked solution from *do not change*'
         type: string
         default: solutions/
       solution_release_folder:
@@ -63,9 +63,11 @@ jobs:
           New-Item -ItemType Directory -Force -Path "${{ inputs.solution_outbound_folder }}"
           New-Item -ItemType Directory -Force -Path "${{ inputs.solution_shipping_folder }}"
 
+      # Install PP tools (required for @v1 actions)
       - name: Install Power Platform Tools
         uses: microsoft/powerplatform-actions/actions-install@v1
 
+      # Pack the solution from repo (unmanaged)
       - name: Pack solution (unmanaged zip from repo)
         uses: microsoft/powerplatform-actions/pack-solution@v1
         with:
@@ -73,6 +75,7 @@ jobs:
           solution-file:   ${{ inputs.solution_outbound_folder }}\${{ inputs.solution_name }}.zip
           solution-type: Unmanaged
 
+      # Import unmanaged to BUILD
       - name: Import solution as unmanaged to BUILD env
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
@@ -84,6 +87,7 @@ jobs:
           force-overwrite: true
           publish-changes: true
 
+      # Export managed from BUILD
       - name: Export solution as managed (from BUILD)
         uses: microsoft/powerplatform-actions/export-solution@v1
         with:
@@ -95,15 +99,15 @@ jobs:
           managed:              true
           solution-output-file: ${{ inputs.solution_shipping_folder }}\${{ inputs.solution_name }}_managed.zip
 
+      # Upload artifact (v4) - name must be unique per run
       - name: Upload the ready-to-ship managed solution
         uses: actions/upload-artifact@v4
         with:
-          # unique name for v4
           name: managedSolutions-${{ github.run_id }}
           path: ${{ inputs.solution_shipping_folder }}/
           retention-days: 7
 
-  release-to-staging:
+  release-to-prod:
     needs: [convert-to-managed]
     runs-on: windows-latest
     env:
@@ -118,6 +122,7 @@ jobs:
         shell: pwsh
         run: New-Item -ItemType Directory -Force -Path "${{ inputs.solution_release_folder }}"
 
+      # Download artifact (v4) - use the same unique name
       - name: Fetch the ready-to-ship solution artifact
         uses: actions/download-artifact@v4
         with:
