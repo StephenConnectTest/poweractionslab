@@ -1,4 +1,4 @@
-name: export-and-branch-solution
+name: export-and-branch-solution2
 # Export solution from DEV environment
 # Unpack it and prepare, commit and push a git branch with the changes
 
@@ -24,17 +24,19 @@ on:
         required: true
         default: solutions/
 
-#edit your values here
+# ✅ Correct location for workflow‑level environment variables
+env:
   ENVIRONMENT_URL: https://orgc9b19932.crm11.dynamics.com/
   CLIENT_ID: 717226da-1708-458e-b56a-559e3a991cc3
   TENANT_ID: 21f86a55-b21d-41aa-b173-656614ff35d9
+
 permissions:
   contents: write
 
 jobs:
   export-from-dev:
-    runs-on: windows-latest        # or ubuntu-latest
-    timeout-minutes: 60            # optional: more headroom for transient retries
+    runs-on: windows-latest
+    timeout-minutes: 60
     env:
       RUNNER_DEBUG: 1
 
@@ -51,7 +53,7 @@ jobs:
         uses: microsoft/powerplatform-actions/who-am-i@v1
         with:
           environment-url: ${{ env.ENVIRONMENT_URL }}
-          application-id: ${{ env.CLIENT_ID }}
+          app-id: ${{ env.CLIENT_ID }}
           tenant-id:       ${{ env.TENANT_ID }}
           client-secret:   ${{ secrets.PowerPlatformSPN }}
 
@@ -59,7 +61,7 @@ jobs:
         uses: microsoft/powerplatform-actions/export-solution@v1
         with:
           environment-url:      ${{ env.ENVIRONMENT_URL }}
-          application-id:       ${{ env.CLIENT_ID }}
+          app-id:       ${{ env.CLIENT_ID }}
           tenant-id:            ${{ env.TENANT_ID }}
           client-secret:        ${{ secrets.PowerPlatformSPN }}
           solution-name:        ${{ github.event.inputs.solution_name }}
