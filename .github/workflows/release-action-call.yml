@@ -14,7 +14,7 @@ jobs:
       #You can specify the solution name here
       solution_name: GithubApp
       #Update your values here
-      BUILD_ENVIRONMENT_URL: https://orgc9b19932.crm11.dynamics.com/
+      BUILD_ENVIRONMENT_URL: https://orgb470c715.crm11.dynamics.com/
       PRODUCTION_ENVIRONMENT_URL: https://org6b012c23.crm11.dynamics.com/
       CLIENT_ID: 717226da-1708-458e-b56a-559e3a991cc3
       TENANT_ID: 21f86a55-b21d-41aa-b173-656614ff35d9      
