@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
     with:
       #You can specify the solution name here
-      solution_name: GithubApp
+      solution_name: NewApp
       #Update your values here
       BUILD_ENVIRONMENT_URL: https://orgb470c715.crm11.dynamics.com/
       PRODUCTION_ENVIRONMENT_URL: https://org6b012c23.crm11.dynamics.com/
