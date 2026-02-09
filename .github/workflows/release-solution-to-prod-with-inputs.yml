@@ -8,7 +8,7 @@ on:
       solution_name:
         description: 'The solution unique name (not display name)'
         type: string
-        default: GithubApp
+        default: NewAppClean
       solution_shipping_folder:
         description: 'folder name for staging the exported solution *do not change*'
         type: string
