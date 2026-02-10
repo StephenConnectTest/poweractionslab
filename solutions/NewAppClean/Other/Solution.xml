@@ -94,14 +94,6 @@
         <Dependent type="80" schemaName="new_TimeofRequests" displayName="Time of Requests" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedsharepointonline_ad2dd" solution="Active" id.connectionreferencelogicalname="new_sharedsharepointonline_ad2dd" />
-        <Dependent type="29" displayName="SharePoint to Teams" id="{7c47b637-7006-f111-8407-6045bd0baaaa}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedteams_ccf32" solution="Active" id.connectionreferencelogicalname="new_sharedteams_ccf32" />
-        <Dependent type="29" displayName="SharePoint to Teams" id="{7c47b637-7006-f111-8407-6045bd0baaaa}" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.15)" id.uniquename="AppChannel">
           <package appName="PowerAppsAppFramework Package" version="1.0.0.25">PowerAppsAppFramework_Anchor (1.0.0.25)</package>
         </Required>
